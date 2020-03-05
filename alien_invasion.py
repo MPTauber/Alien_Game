@@ -1,9 +1,10 @@
-## py -3 venv alien_venv
+## py -3 -m venv alien_venv
 ## alien_venv/scripts/activate
-## pip install pygame
+## pip install pygame, or:
+## python -m pip install --user pygame
 
-import sys ### use tools in this package to exit game when player quits
 import pygame
+import sys ### use tools in this package to exit game when player quits
 from settings import Settings ## the file with the class we made
 from ship import Ship
 
@@ -55,7 +56,7 @@ class AlienInvasion:
             sys.exit()
 
     def _check_keyup_events(self, event):
-        """Respond to keypresses."""
+        """ Respond to keypresses."""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
         elif event.key == pygame.K_LEFT:
