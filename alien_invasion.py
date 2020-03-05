@@ -24,6 +24,7 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self) # this gives ship access to the games resources
+        self.bullets = pygame.sprite.Group()
 
         # Set the background color:
         self.bg_color = (230, 230, 230)
@@ -33,6 +34,7 @@ class AlienInvasion:
         while True:
             self._check_events() #single leading underscore indicates helper method
             self.ship.update() #updates position in response to key clicks
+            self.bullets.update() # for each sprite in the grouup. This line calls bullet.update() for each bullet we place in the group bullets.
             self._update_screen()
 
             # Watch for keyboard and mouse events.
