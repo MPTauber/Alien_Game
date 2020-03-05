@@ -41,7 +41,7 @@ class AlienInvasion:
             self.ship.update() #updates position in response to key clicks
             self._update_bullets()
             #print(len(self.bullets))
-            
+            self._update_aliens()
             self._update_screen()
 
             # Watch for keyboard and mouse events.
@@ -101,7 +101,7 @@ class AlienInvasion:
         #Determine the number of rows of aliens that fit on the screen.
         ship_height = self.ship.rect.height
         available_space_y = (self.settings.screen_height - (3 * alien_height) - ship_height)
-        number_rows = available_space_y // (2* alien_height)
+        number_rows = available_space_y // (2 * alien_height)
 
         #Create the full fleet of aliens.
         for row_number in range(number_rows):
@@ -129,6 +129,10 @@ class AlienInvasion:
 
         # Make the most recently drawn screen visible.
         pygame.display.flip() ## continually updates the display so it looks like there is smooth movement
+
+    def _update_aliens(self):
+        """Update the positions of all aliens in the fleet."""
+        self.aliens.update()
 
 if __name__ == "__main__":
     # Make a game instance, and run game.
