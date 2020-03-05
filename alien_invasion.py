@@ -8,6 +8,7 @@ import sys ### use tools in this package to exit game when player quits
 from settings import Settings ## the file with the class we made
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 #### First, we create a class to represent the game
 class AlienInvasion:
@@ -26,6 +27,9 @@ class AlienInvasion:
 
         self.ship = Ship(self) # this gives ship access to the games resources
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
 
         # Set the background color:
         self.bg_color = (230, 230, 230)
@@ -36,7 +40,7 @@ class AlienInvasion:
             self._check_events() #single leading underscore indicates helper method
             self.ship.update() #updates position in response to key clicks
             self._update_bullets()
-            print(len(self.bullets))
+            #print(len(self.bullets))
             
             self._update_screen()
 
@@ -83,6 +87,24 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+    
+    def _create_fleet(self):
+        """Create the fleet of aliens."""
+        #Create an alien and find the number of aliens in a row.
+        #Spacing between each alien is equal to one alien width.
+        #Make an alien:
+        alien = Alien(self)
+        alien_width = alien.rect.width
+        available_space_x = self.settings.screen_width - (2 * alien_width)
+        number_aliens_x = available_space_x // (2 * alien_width)
+
+        #Create the first row of aliens
+        for alien_number in range(number_aliens_x):
+            #Create an alien and place it in the row.
+            alien = Alien(self)
+            alien.x = alien_width + 2 * alien_width * alien_number
+            alien.rect.x = alien.x
+            self.aliens.add(alien)
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
@@ -91,6 +113,7 @@ class AlienInvasion:
         self.ship.blitme() # this draws the ship
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        self.aliens.draw(self.screen)
 
         # Make the most recently drawn screen visible.
         pygame.display.flip() ## continually updates the display so it looks like there is smooth movement
