@@ -5,6 +5,7 @@
 import sys ### use tools in this package to exit game when player quits
 import pygame
 from settings import Settings ## the file with the class we made
+from ship import Ship
 
 #### First, we create a class to represent the game
 class AlienInvasion:
@@ -19,7 +20,9 @@ class AlienInvasion:
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height)) ## 1200px by 800px. From the settings class
         # Assigned ^ to self.screen so it's available in all methods in the class 
-        pygame.display.set_caption("Alien Invasion")#
+        pygame.display.set_caption("Alien Invasion")
+
+        self.ship = Ship(self) # this gives ship access to the games resources
 
         # Set the background color:
         self.bg_color = (230, 230, 230)
@@ -34,6 +37,7 @@ class AlienInvasion:
             
             # Redraw the screen during each pass thruogh the loop.
             self.screen.fill(self.settings.bg_color) ## taken from settings.py file
+            self.ship.blitme() # this draws the ship
             
             # Make the most recently drawn screen visible.
             pygame.display.flip() ## continually updates the display so it looks like there is smooth movement
