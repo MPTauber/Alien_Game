@@ -19,7 +19,7 @@ class AlienInvasion:
 
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height)) ## 1200px by 800px. From the settings class
-        # Assigned ^ to self.screen so it's available in all methods in the class 
+        # Assigned ^ to self.screen so it's available in all methods in the class
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self) # this gives ship access to the games resources
@@ -45,15 +45,16 @@ class AlienInvasion:
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
 
-    def _check_keydown_events(self,event):
+    def _check_keydown_events(self, event):
         """Respond to keypresses."""
-        if event.key == pygame.K_RIGHT:
-            #Move the ship to the right.
+        if event.key == pygame.K_RIGHT: #Move the ship to the right.
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
+        elif event.key == pygame.K_q:
+            sys.exit()
 
-    def _check_keyup_events(self,event):
+    def _check_keyup_events(self, event):
         """Respond to keypresses."""
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
@@ -73,4 +74,3 @@ if __name__ == "__main__":
     # Make a game instance, and run game.
     ai = AlienInvasion()
     ai.run_game()
-
