@@ -35,13 +35,8 @@ class AlienInvasion:
         while True:
             self._check_events() #single leading underscore indicates helper method
             self.ship.update() #updates position in response to key clicks
-            self.bullets.update() # for each sprite in the grouup. This line calls bullet.update() for each bullet we place in the group bullets.
-            
-            # Get rid of bullets that have disappeared.
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
-                print(len(self.bullets))
+            self._update_bullets()
+            print(len(self.bullets))
             
             self._update_screen()
 
@@ -80,6 +75,14 @@ class AlienInvasion:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
  
+    def _update_bullets(self):
+        """Update positions of bullets and get rid of old bullets."""
+        #Update bullet positions
+        self.bullets.update() # for each sprite in the grouup. This line calls bullet.update() for each bullet we place in the group bullets.
+        # Get rid of bullets that have disappeared.
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
 
     def _update_screen(self):
         """Update images on the screen, and flip to the new screen."""
