@@ -90,7 +90,7 @@ class AlienInvasion:
 
         self._check_bullet_alien_collisions()
     
-    def _check_bullet_alien_collisions():
+    def _check_bullet_alien_collisions(self):
         """Respond to bullet-alien collisions."""
         #Check for any bullets that have hit aliens.
         # if so, get rid of the bullet and the alien.
@@ -168,7 +168,7 @@ class AlienInvasion:
         #Look for alien-ship collisions.
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             print("Ship hit!!!")
-            
+
 
 if __name__ == "__main__":
     # Make a game instance, and run game.
