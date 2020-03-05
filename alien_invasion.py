@@ -8,6 +8,7 @@ import sys ### use tools in this package to exit game when player quits
 from time import sleep # to pause the game for a moment when the ship is hit
 from settings import Settings ## the file with the class we made
 from game_stats import GameStats
+from button import Button
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
@@ -35,6 +36,9 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group()
 
         self._create_fleet()
+
+        # Make the Play button.
+        self.play_button = Button(self, "Play")
 
         # Set the background color:
         self.bg_color = (230, 230, 230)
@@ -169,6 +173,10 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
+
+        #Draw the plazz button if the game is inactive
+        if not self.stats.game_active:
+            self.play_button.draw_button()
 
         # Make the most recently drawn screen visible.
         pygame.display.flip() ## continually updates the display so it looks like there is smooth movement
