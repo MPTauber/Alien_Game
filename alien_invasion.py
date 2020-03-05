@@ -43,10 +43,12 @@ class AlienInvasion:
         """Start the main loop for the game."""
         while True:
             self._check_events() #single leading underscore indicates helper method
-            self.ship.update() #updates position in response to key clicks
-            self._update_bullets()
-            #print(len(self.bullets))
-            self._update_aliens()
+
+            if self.stats.game_active:
+                self.ship.update() #updates position in response to key clicks
+                self._update_bullets()
+                #print(len(self.bullets))
+                self._update_aliens()
             self._update_screen()
 
             # Watch for keyboard and mouse events.
