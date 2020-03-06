@@ -8,6 +8,7 @@ import sys ### use tools in this package to exit game when player quits
 from time import sleep # to pause the game for a moment when the ship is hit
 from settings import Settings ## the file with the class we made
 from game_stats import GameStats
+from scoreboard import Scoreboard
 from button import Button
 from ship import Ship
 from bullet import Bullet
@@ -28,8 +29,9 @@ class AlienInvasion:
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
 
-        #Create an instance to store game statistics.
+        # Create an instance to store game statistics, and create a scoreboard.
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
 
         self.ship = Ship(self) # this gives ship access to the games resources
         self.bullets = pygame.sprite.Group()
@@ -200,7 +202,10 @@ class AlienInvasion:
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
 
-        #Draw the plazz button if the game is inactive
+        # Draw the score information.
+        self.sb.show_score()
+
+        #Draw the play button if the game is inactive
         if not self.stats.game_active:
             self.play_button.draw_button()
 
