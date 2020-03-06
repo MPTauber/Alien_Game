@@ -88,6 +88,9 @@ class AlienInvasion:
             # Hide the mouse cursor
             pygame.mouse.set_visible(False)
 
+            # Reset the game settings.
+            self.settings.initialize_dynamic_settings()
+
     def _check_keydown_events(self, event):
         """Respond to keypresses."""
         if event.key == pygame.K_RIGHT: #Move the ship to the right.
