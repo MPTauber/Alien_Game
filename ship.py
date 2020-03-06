@@ -1,13 +1,15 @@
 ### for images in pygames, use .bmp files because pygame loads bitmaps by default
 import pygame
+from pygame.sprite import Sprite
 
 ## We treat the ship as a rectangle in this class, because it is easier to work with for when objects in the game collide, etc.
 
-class Ship:
+class Ship(Sprite):
     """A class to manage the ship."""
 
     def __init__(self, ai_game):
         """Initialize the ship and set its starting position."""
+        super().__init__()
         self.screen = ai_game.screen ## references to the alien invasion class so it can use all methods in there
         self.settings = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect() # rect is rectangle. This command lets us place the rect where we want
