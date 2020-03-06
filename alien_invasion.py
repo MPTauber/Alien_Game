@@ -143,6 +143,7 @@ class AlienInvasion:
             #Destroy the existing bullets and create new fleet.
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
     
     def _create_fleet(self):
         """Create the fleet of aliens."""
